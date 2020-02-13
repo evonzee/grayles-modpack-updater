@@ -14,5 +14,4 @@ RUN set -x \
 USER steam
 
 COPY load-mods.pl .
-COPY current-modpack.csv .
 

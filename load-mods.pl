@@ -53,7 +53,7 @@ sub main() {
 
 
 sub readCsv(){
-    my $file = "current-modpack.csv";
+    my $file = "/mods/current-modpack.csv";
     my $csv = Text::CSV->new({ 
         sep_char    => ',', 
         auto_diag   => 2, 
@@ -157,9 +157,10 @@ sub downloadSteam() {
 
     print "Copying mods to output folder and renaming...";
     foreach my $item (@processed) {
+        print "Copying " . $item->{name} . "\n";
         my $id = $item->{id};
         my $name = $item->{name};
-        my $startfile = "/tmp/steamapps/workshop/content/211820/$id/content.pak";
+        my $startfile = "/tmp/steamapps/workshop/content/211820/$id/contents.pak";
         my $endfile = "/mods/$name.pak";
         copy($startfile, $endfile);
     }
