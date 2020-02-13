@@ -44,8 +44,6 @@ sub main() {
     downloadSteam(\@steamDownloads);
 
     #download with steamcmd
-
-    #rename the pakfiles
    
         
     # write a new modpack csv with versioning if possible
@@ -137,6 +135,7 @@ sub downloadSteam() {
                 push(@processed, $item);
             }
         }
+        print $fh "quit\n";
         $fh->close();
 
     } else {
@@ -154,14 +153,15 @@ sub downloadSteam() {
     my @command = ["./steamcmd.sh","+runscript","/tmp/sc-script"];
     run3( @command );
     print "Done with steamcmd.\n";
+    unlink "/tmp/sc-script";
 
-    print "Moving mods to output folder and renaming...";
+    print "Copying mods to output folder and renaming...";
     foreach my $item (@processed) {
         my $id = $item->{id};
         my $name = $item->{name};
         my $startfile = "/tmp/steamapps/workshop/content/211820/$id/content.pak";
         my $endfile = "/mods/$name.pak";
-        move($startfile, $endfile);
+        copy($startfile, $endfile);
     }
 
 }

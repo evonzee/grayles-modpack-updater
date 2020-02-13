@@ -16,5 +16,3 @@ USER steam
 COPY load-mods.pl .
 COPY current-modpack.csv .
 
-ENTRYPOINT [ "perl", "load-mods.pl" ]
-
